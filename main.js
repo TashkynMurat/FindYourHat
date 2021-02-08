@@ -81,4 +81,30 @@ class Field {
             console.log(this.field[i].join(''));
         }
     }
+
+    static generateField(width, height, percentage = 0.1) {
+      let newField = new Array(height).fill(0).map(el => new Array(width));
+        for (let i = 0; i < height; i++) {
+          for (let j = 0; j < width; j++) {
+            const probability = Math.random()
+            newField[i][j] = probability > percentage ? fieldCharacter : hole;
+          }
+        }
+
+        const locationOfHat = {
+          x: Math.floor(Math.random() * width),
+          y: Math.floor(Math.random() * height)
+        };
+
+        while (locationOfHat.x === 0 && locationOfHat.y === 0) {
+          locationOfHat.x = Math.floor(Math.random() * width);
+          locationOfHat.y = Math.floor(Math.random() * height);
+        }
+        newField[locationOfHat.y][locationOfHat.x] = hat;
+        return newField;
+    } 
 }
+
+
+const test = new Field(Field.generateField(15, 15, 0.2));
+test.Game();
