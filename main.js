@@ -7,17 +7,46 @@ const pathCharacter = '*';
 
 class Field {
     constructor(field) {
-        this._field = field;
-    }
-
-    get field() {
-        return this._field;
+        this.field = field;
+        this.locationX = 0;
+        this.locationY = 0;
+        this.field[0][0] = pathCharacter;
     }
 
     print() {
         for(let i = 0; i < this.field.length; i++) {
             console.log(this.field[i].join(''));
         }
+    }
+
+    question() {
+        const input = prompt('Where? (U, D, L, R)').toUpperCase();
+        switch (input) {
+            case 'U':
+                this.locationY -= 1;
+                break;
+            case 'D':
+                this.locationY += 1;
+                break;
+            case 'L':
+                this.locationX -= 1;
+                break;
+            case 'R':
+                this.locationX += 1;
+            default:
+                console.log('You enetered invalid value! Try again! (U - up, D - down, L - left, R - right)');
+                this.question();
+                break;
+
+        }
+    }
+
+    isHole() {
+        return this.field[this.locationY][this.locationX] === hole;
+    }
+
+    isHat() {
+        return this.field[this.locationY][this.locationX] === hat;
     }
 }
 
