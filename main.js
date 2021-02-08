@@ -48,6 +48,15 @@ class Field {
     isHat() {
         return this.field[this.locationY][this.locationX] === hat;
     }
+
+    Boundaries() {
+        return (
+            this.locationY >= 0 &&
+            this.locationX >= 0 &&
+            this.locationY < this.field.length &&
+            this.locationX < this.field[0].length
+          );
+    }
 }
 
 const test = new Field([
