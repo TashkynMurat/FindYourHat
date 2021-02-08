@@ -13,6 +13,29 @@ class Field {
         this.field[0][0] = pathCharacter;
     }
 
+    Game() {
+        let gameInProgress = true;
+        while(gameInProgress) {
+            this.print();
+            this.question();
+            if (this.isHat()) {
+                console.log('You won!');
+                gameInProgress = false;
+                break;
+            } else if (this.isHole) {
+                console.log('You fell in hole!');
+                gameInProgress = false;
+                break;
+            } else if (!(this.Boundaries)) {
+                console.log('You are out of boundaries!');
+                gameInProgress = false;
+                break;
+            }
+
+            this.field[this.locationY][this.locationX] = pathCharacter;
+        }
+    }
+
     print() {
         for(let i = 0; i < this.field.length; i++) {
             console.log(this.field[i].join(''));
@@ -63,4 +86,4 @@ const test = new Field([
     ['*', '░', '0'],
     ['░', '0', '░'],
     ['░', '^', '░']]);
-test.print();
+test.Game();
